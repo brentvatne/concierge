@@ -29,7 +29,6 @@ class ApiClient
     url = 'https://www.car2go.com/api/accesstoken'
     headers = {'Authorization' => auth_headers(url, :for_authentication)}
     response = HTTParty.post(url, headers: headers).parsed_response
-    byebug
     Rack::Utils.parse_nested_query(response).symbolize_keys!
   end
 
