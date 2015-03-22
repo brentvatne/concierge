@@ -10,6 +10,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'httparty'
 gem 'autoprefixer-rails'
+gem 'bcrypt', '~> 3.1.7'
 
 group :production do
   gem 'unicorn'

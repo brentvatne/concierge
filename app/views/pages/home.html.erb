@@ -1,1 +1,5 @@
-<%= react_component 'LoginPage', {authorizationUrl: @authorization_url} %>
+<% if current_user.present? %>
+  <p><%= current_user.name %> is logged in!</p>
+<% else %>
+  <%= react_component 'LoginPage', {authorizationUrl: @authorization_url} %>
+<% end %>

@@ -3,6 +3,21 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  def current_user
+    return nil if session[:current_user_id].nil?
+    @current_user ||= begin
+      user = User.find_by_id(session[:current_user_id])
+
+      # Clear it if no user was found with that id
+      if user.nil?
+        session[:current_user_id] = nil
+      end
+
+      user
+    end
+  end
+  helper_method :current_user
+
   before_filter :deep_snake_case_params!
   def deep_snake_case_params!(val = params)
     case val

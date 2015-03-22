@@ -1,20 +1,39 @@
 global.LoginPage = React.createClass({
   getInitialState: function() {
     return {
-      waitingForVerifier: false
+      waitingForVerifier: false,
+      waitingForUserInfo: false
     }
   },
 
-  toggleVerifierInput: function() {
+  toggleVerifierInput: function(e) {
     this.setState({waitingForVerifier: true});
   },
 
-  submitVerificationCode: function() {
-    var verificationCode = this.refs.verifierInput.getDOMNode().value;
-    // TODO: handle errors, right now assuming that it cannot fail
+  // TODO: show loading ("verifying ...")
+  // TODO: handle errors, right now assuming that it cannot fail
+  submitVerificationCode: function(e) {
+    e.preventDefault()
+    var verificationCode = this.refs.verifierInput.getDOMNode().value,
+        self = this;
+
     $.post('/auth', {verificationCode: verificationCode}).
       done(function(response) {
-        debugger
+        self.setState({waitingForVerifier: false, waitingForUserInfo: true});
+      });
+  },
+
+  submitUserInfo: function(e) {
+    e.preventDefault()
+    var name = this.refs.nameInput.getDOMNode().value,
+        email = this.refs.emailInput.getDOMNode().value,
+        phone = this.refs.phoneInput.getDOMNode().value,
+        password = this.refs.passwordInput.getDOMNode().value,
+        self = this;
+
+    $.post('/users', {user: {name: name, email: email, phone: phone, password: password}}).
+      done(function(response) {
+        window.location.reload();
       });
   },
 
@@ -28,11 +47,27 @@ global.LoginPage = React.createClass({
           <img src="http://url.brentvatne.ca/dCaF.png" /> 
           <input type="text" ref="verifierInput"
             placeholder="Enter your verification code here" />
-          <a className="big-button">
-             Finish
-          </a>
+          <button className="big-button">
+             Continue
+          </button>
         </form>        
       )      
+    } else if (this.state.waitingForUserInfo) {
+      action = (
+        <form className="user-info-input-wrapper"
+              onSubmit={this.submitUserInfo}>
+          <p>Great! Just fill in a few more details and we can get started.</p>
+
+          <input key="name" type="text" ref="nameInput" placeholder="Name" />
+          <input key="email" type="email" ref="emailInput" placeholder="Email" />
+          <input key="phone" type="text" ref="phoneInput" placeholder="Phone" />
+          <input key="password" type="password" ref="passwordInput" placeholder="Password" />
+
+          <button className="big-button">
+            Finish
+          </button>
+        </form>        
+      )
     } else {
       action = (
         <div>
@@ -64,6 +99,11 @@ global.LoginPage = React.createClass({
     if (prevState.waitingForVerifier === false &&
         this.state.waitingForVerifier === true) {
       $(this.refs.verifierInput.getDOMNode()).focus();
+    }
+
+    if (prevState.waitingForUserInfo === false &&
+        this.state.waitingForUserInfo === true) {
+      $(this.refs.nameInput.getDOMNode()).focus();
     }
   }
 })

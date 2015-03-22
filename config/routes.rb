@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'pages#home'
   post '/auth' => 'authentication#create'
+  resources :users
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

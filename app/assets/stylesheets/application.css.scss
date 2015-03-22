@@ -63,6 +63,7 @@ h1,h2,h3,h4,h5,h6,p,span,div {
 $blue: #4A90E2;
 
 .big-button {
+  border: none;
   display: inline-block;
   width: 100%;
   background: $blue;
@@ -80,19 +81,25 @@ $blue: #4A90E2;
   font-weight: 300;
 }
 
+.login-box {
+  input[type=text], input[type=email], input[type=password] {
+    width: 100%;
+    font-size: 16px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+  }
+}
+
 .verifier-input-wrapper {
   img {
     max-width: 100%;
   }
 
   input[type=text] {
-    width: 100%;
-    font-size: 16px;
-    text-align: center;
-    padding: 15px;
-    margin-bottom: 15px;
     box-shadow: 0px 0px 10px 3px rgba(224, 231, 14, 0.3);
     border: 1px solid #DAD10B;
+    text-align: center;
 
     &:focus {
       outline: none;
