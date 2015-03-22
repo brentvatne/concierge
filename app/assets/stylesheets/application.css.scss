@@ -1,0 +1,101 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  background: #F5F2F2;
+  margin: 0;
+  padding: 0;
+}
+
+h1,h2,h3,h4,h5,h6,p,span,div {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+  width: 1140px;
+  margin: 0 auto;
+}
+
+.card {
+  width: 600px;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.14);
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+
+  p {
+    max-width: 75%;
+    margin: 0 auto 30px auto;
+  }
+
+  h1 {
+    margin-bottom: 30px;
+  }
+}
+
+.login-box {
+  margin-top: 70px;
+}
+
+$blue: #4A90E2;
+
+.big-button {
+  display: inline-block;
+  width: 100%;
+  background: $blue;
+  padding: 20px;
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer {
+  margin-top: 20px;
+  color: rgba(0,0,0,0.35);
+  text-align: center;
+  font-weight: 300;
+}
+
+.verifier-input-wrapper {
+  img {
+    max-width: 100%;
+  }
+
+  input[type=text] {
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0px 0px 10px 3px rgba(224, 231, 14, 0.3);
+    border: 1px solid #DAD10B;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
