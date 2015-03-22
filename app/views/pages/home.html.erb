@@ -1,19 +1,5 @@
 <% if current_user.present? %>
-  <h3>Rentals:</h3>
-  <table>
-    <tr>
-      <td>Cost</td>
-      <td>Start</td>
-      <td>End</td>
-    </tr>
-    <% @rentals.each do |rental| %>
-      <tr>
-        <td><%= rental.cost %></td>
-        <td><%= rental.start_location %> at <%= rental.start_time %></td>
-        <td><%= rental.end_location %> at <%= rental.end_time %></td>
-      </tr>
-    <% end %>
-  </table>
+  <h2>Hello there <%= current_user.name %>!
 <% else %>
   <%= react_component 'LoginPage', {authorizationUrl: @authorization_url} %>
 <% end %>
