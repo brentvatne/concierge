@@ -3,7 +3,7 @@ global.ListPage = React.createClass({
     return {
       upcomingBookings: [],
       completedBookings: [],
-      loaded: false
+      isLoading: false
     }
   },
 
@@ -12,8 +12,23 @@ global.ListPage = React.createClass({
   },
 
   cancelBookingFn: function(booking) {
-    return function() {
-      console.log("cancel: " + booking.id);
+    var self = this;
+
+    return function(e) {
+      e.preventDefault()
+      self.setState({isLoading: true});
+
+      $.ajax({
+          url: '/bookings/' + booking.id,
+          type: 'DELETE',
+          success: function(result) {
+            // Lazy
+            window.location.reload();
+          },
+          complete: function() {
+            // self.setState({isLoading: false});
+          }
+      });
     }
   },
 
@@ -68,6 +83,7 @@ global.ListPage = React.createClass({
     return (
       <div>
         <PrimaryNavigation showScheduleBooking={true} />
+        <LoadingOverlay isVisible={this.state.isLoading} />
 
         <div className="container">
           <div className="card list-page-content">

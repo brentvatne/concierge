@@ -3,6 +3,11 @@ class BookingsController < ApplicationController
   def new
   end
 
+  def destroy
+    @booking = Booking.find(params[:id])
+    render json: {success: !!@booking.destroy}
+  end
+
   def create
     time = Chronic.parse("#{booking_params[:date]} at #{booking_params[:time]}")
 
