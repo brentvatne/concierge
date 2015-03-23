@@ -62,7 +62,7 @@ global.ListPage = React.createClass({
 
             <p className="booking--info--location">
               <span>
-                Within 500m of {b.address}
+                Near {b.address}
               </span>
             </p>
           </div>
