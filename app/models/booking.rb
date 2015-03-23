@@ -6,7 +6,7 @@ class Booking < ActiveRecord::Base
     where('time > ?', Time.now)
   end
 
-  def incomplete
+  def self.incomplete
     where('complete = ?', false)
   end
 
