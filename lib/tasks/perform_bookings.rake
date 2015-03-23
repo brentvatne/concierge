@@ -17,8 +17,11 @@ task :perform_bookings => [:environment] do
         find_all { |car| car['distance'] < MAXIMUM_DISTANCE }.
         sort_by  { |car| car['distance'] }
 
+      puts cars
+
       cars.each do |car|
         begin
+          puts "attempting to book #{car['vin']}"
           break if booking.perform!(car['vin'])
         rescue Exception => e
           Rails.logger.info(e.inspect)
@@ -26,12 +29,14 @@ task :perform_bookings => [:environment] do
       end
 
       if booking.complete?
+        puts "sending text.."
         twilio.messages.create(
           from: '+16042278434',
           to: booking.user.phone,
           body: "car2go booking: #{booking.car_address} ready"
         )
       else
+        puts "nothing close enough.."
         # how much time is left? possibly send a warning if only 10 mins left
         # and still nothing
         #
