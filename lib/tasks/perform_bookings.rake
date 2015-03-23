@@ -1,5 +1,3 @@
-MAXIMUM_DISTANCE = 750
-
 task :perform_bookings => [:environment] do
   twilio = Twilio::REST::Client.new
 
@@ -14,7 +12,7 @@ task :perform_bookings => [:environment] do
     bookings.each do |booking|
       cars = cars.
         map      { |car| car['distance'] = booking.distance_to(car['location']); car }.
-        find_all { |car| car['distance'] < MAXIMUM_DISTANCE }.
+        find_all { |car| car['distance'] < 750 }.
         sort_by  { |car| car['distance'] }
 
       puts cars
