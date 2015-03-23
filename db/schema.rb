@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20150323213950) do
     t.string   "address"
     t.float    "lat"
     t.float    "lon"
-    t.boolean  "complete"
+    t.boolean  "complete",        default: false, null: false
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
