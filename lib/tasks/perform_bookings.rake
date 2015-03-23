@@ -22,7 +22,7 @@ task :perform_bookings => [:environment] do
           puts "attempting to book #{car['vin']}"
           break if booking.perform!(car['vin'])
         rescue Exception => e
-          Rails.logger.info(e.inspect)
+          Rails.logger.info(e.backtrace)
         end
       end
 

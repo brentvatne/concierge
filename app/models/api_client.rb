@@ -53,7 +53,9 @@ class ApiClient
     response = HTTParty.post(
       url + "?format=json&loc=vancouver&vin=#{vin}&account=#{account}",
      headers: {'Authorization' => auth_headers(url, :create_booking, vin: vin, account: account)}
-    ).parsed_response['booking'].first
+    )
+
+    response = response.parsed_response['booking'].first
 
     {address: response['bookingposition']['address'], time: Time.at(response['reservationTime']['timeInMillis']) }
   end
