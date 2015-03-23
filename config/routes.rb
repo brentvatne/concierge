@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions
 
+  get '/new-booking' => 'bookings#new'
   resources :bookings do
     collection do
       get :upcoming
