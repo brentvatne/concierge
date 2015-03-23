@@ -20,7 +20,6 @@ task :perform_bookings => [:environment] do
       end
 
       if booking.complete?
-        byebug
         # send text notification
       else
         # how much time is left? possibly send a warning if only 10 mins left

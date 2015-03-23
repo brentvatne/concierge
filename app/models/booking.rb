@@ -6,6 +6,10 @@ class Booking < ActiveRecord::Base
     where('time > ?', Time.now)
   end
 
+  def incomplete
+    where('complete = ?', false)
+  end
+
   def self.within_thirty_minutes
     where('time >= ? and time <= ?', Time.now, Time.now + 30.minutes)
   end
@@ -19,8 +23,10 @@ class Booking < ActiveRecord::Base
   end
 
   def perform!(vin)
-    if user.create_booking(vin)
-      update_attributes(complete: true)
+    car = if user.create_booking(vin)
+      update_attributes(complete: true,
+                        car_address: car[:address],
+                        car_booked_time: car[:time])
     end
   end
 

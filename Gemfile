@@ -14,6 +14,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'geokit'
 gem 'active_model_serializers'
 gem 'chronic'
+gem 'twilio-ruby'
 
 group :production do
   gem 'unicorn'

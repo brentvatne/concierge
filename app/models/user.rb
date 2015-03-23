@@ -18,7 +18,11 @@ class User < ActiveRecord::Base
   end
 
   def create_booking(vin)
-    api_client.create_booking(vin, account_id)
+    if response = api_client.create_booking(vin, account_id)
+      response
+    else
+      nil
+    end
   end
 
   private

@@ -45,10 +45,17 @@ class ApiClient
     "https://www.car2go.com/api/authorize?oauth_token=#{tokens[:oauth_token]}"
   end
 
+  # TODO: Need to handle error cases!
+  # http://url.brentvatne.ca/12FjM
+  #
   def create_booking(vin, account)
     url = 'https://www.car2go.com/api/v2.1/bookings'
-    HTTParty.post(url + "?format=json&loc=vancouver&vin=#{vin}&account=#{account}",
-                 headers: {'Authorization' => auth_headers(url, :create_booking, vin: vin, account: account)})
+    response = HTTParty.post(
+      url + "?format=json&loc=vancouver&vin=#{vin}&account=#{account}",
+     headers: {'Authorization' => auth_headers(url, :create_booking, vin: vin, account: account)}
+    ).parsed_response['booking'].first
+
+    {address: response['bookingposition']['address'], time: Time.at(response['reservationTime']['timeInMillis']) }
   end
 
   def rentals
@@ -173,7 +180,6 @@ class ApiClient
       signature = oauth_signature(url, 'POST',
                                   parameters_for_booking(options[:vin], options[:account]))
       headers = base_auth_headers
-      byebug
     else
       signature = oauth_signature(url)
       headers = base_auth_headers
