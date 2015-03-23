@@ -3,12 +3,55 @@ global.LoginPage = React.createClass({
     return {
       waitingForVerifier: false,
       waitingForUserInfo: false,
+      showExistingAccountForm: false,
       isLoading: false
     }
   },
 
   toggleVerifierInput: function(e) {
     this.setState({waitingForVerifier: true});
+  },
+
+  toggleExistingAccountForm: function(e) {
+    this.setState({showExistingAccountForm: !this.state.showExistingAccountForm});    
+  },
+
+  submitExistingAccountForm: function() {
+    var email = this.refs.emailInput.getDOMNode().value,
+        password = this.refs.passwordInput.getDOMNode().value,
+        self = this;
+
+    this.setState({isLoading: true});
+
+    $.post('/sessions', {email: email, password: password}).
+      done(function(response) {
+        if (response.success == true) {
+          window.location.href = '/';
+        } else {
+          alert('Invalid username or password');
+        }
+      }).
+      complete(function() {
+        self.setState({isLoading: false});
+      });
+  },
+
+  renderExistingAccountForm: function() {
+    return (
+      <form onSubmit={this.submitExistingAccountForm}>
+        <p>Sign in to your Concierge account</p>
+        <input key="email" type="email" ref="emailInput" placeholder="Email" />
+        <input key="password" type="password" ref="passwordInput" placeholder="Password" />
+
+        <div className="form--actions">
+          <button className="medium-button">Sign in</button>
+          <a className="medium-button cancel-button"
+             onClick={this.toggleExistingAccountForm}>
+            Cancel
+          </a>
+        </div>
+      </form>
+    )
   },
 
   submitVerificationCode: function(e) {
@@ -73,6 +116,8 @@ global.LoginPage = React.createClass({
           </button>
         </form>        
       )
+    } else if (this.state.showExistingAccountForm) {
+      action = this.renderExistingAccountForm();
     } else {
       action = (
         <div>
@@ -86,8 +131,13 @@ global.LoginPage = React.createClass({
              onClick={this.toggleVerifierInput}
              target="_blank"
              className="big-button">
-            Sign in through Car2Go
+            Sign up through Car2Go
           </a>
+          <p className="login-or">or</p>
+          <a onClick={this.toggleExistingAccountForm}
+             className="big-button alternate-button mb20">
+            Sign in using an existing account
+          </a> 
         </div>
       )
     }
@@ -114,6 +164,11 @@ global.LoginPage = React.createClass({
     if (prevState.waitingForUserInfo === false &&
         this.state.waitingForUserInfo === true) {
       $(this.refs.nameInput.getDOMNode()).focus();
+    }
+
+    if (prevState.showExistingAccountForm === false &&
+        this.state.showExistingAccountForm === true) {
+      $(this.refs.emailInput.getDOMNode()).focus();
     }
   }
 })

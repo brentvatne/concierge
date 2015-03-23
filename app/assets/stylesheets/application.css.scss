@@ -75,6 +75,38 @@ $blue: #4A90E2;
   font-size: 18px;
   text-decoration: none;
   font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.alternate-button {
+  background: rgb(98, 105, 117);
+}
+
+.mb20 {
+  margin-bottom: 20px;
+}
+
+.medium-button {
+  border: none;
+  display: inline-block;
+  background: $blue;
+  padding: 15px 40px;
+  color: #fff;
+  font-size: 17px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 20px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.cancel-button {
+  background: #BFBFBF;
 }
 
 .footer {
@@ -86,13 +118,25 @@ $blue: #4A90E2;
 
 .login-box {
   max-width: 650px;
+}
 
+.login-box, .new-booking-form {
   input[type=text], input[type=email], input[type=password] {
     width: 100%;
     font-size: 16px;
     padding: 15px;
     margin-bottom: 15px;
     border: 1px solid #eee;
+  }
+}
+
+.new-booking-form {
+  padding: 30px;
+
+  input[type=text] {
+    padding: 25px 20px; 
+    background: #FEFEFE;
+    border: 1px solid #F1F1F1;
   }
 }
 
@@ -233,5 +277,30 @@ $blue: #4A90E2;
 
   .sk-dot2 {
     background: #2A4480;
+  }
+}
+
+.form--actions {
+  margin-top: 15px;
+}
+
+.login-or {
+  margin-top: 10px!important;
+  margin-bottom: 10px!important;
+  color: #888;
+  font-style: italic;
+  font-weight: 300;
+  text-align: center;
+}
+
+.faded-link {
+  color: #888;
+
+  &:hover {
+    color: #ccc !important;
+  }
+
+  &:visited, &:active {
+    color: #888;
   }
 }

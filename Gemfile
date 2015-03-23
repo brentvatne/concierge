@@ -13,6 +13,7 @@ gem 'autoprefixer-rails'
 gem 'bcrypt', '~> 3.1.7'
 gem 'geokit'
 gem 'active_model_serializers'
+gem 'chronic'
 
 group :production do
   gem 'unicorn'

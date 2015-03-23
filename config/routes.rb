@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/auth/new' => 'authentication#new'
   post '/auth' => 'authentication#create'
   resources :users
+  resources :sessions
 
   resources :bookings do
     collection do
