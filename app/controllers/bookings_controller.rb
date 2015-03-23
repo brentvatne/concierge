@@ -25,7 +25,7 @@ class BookingsController < ApplicationController
   end
 
   def upcoming
-    @bookings = current_user.bookings.upcoming
+    @bookings = current_user.bookings.upcoming.order('time ASC')
     @bookings.to_a.map! { |b| BookingSerializer.new(b, root: false) }
     render json: @bookings
   end

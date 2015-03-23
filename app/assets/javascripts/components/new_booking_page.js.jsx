@@ -23,10 +23,11 @@ global.NewBookingPage = React.createClass({
       if (response.success == true) {
         window.location.href = '/'
       } else {
+        self.setState({isLoading: false});
         alert('Something went wrong')
       }
     }).complete(function() {
-      self.setState({isLoading: false});
+      // Problem!
     });
   },
 
