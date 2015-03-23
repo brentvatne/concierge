@@ -1,7 +1,9 @@
 MAXIMUM_DISTANCE = 750
 
 task :perform_bookings => [:environment] do
-  if bookings = Booking.upcoming
+  twilio = Twilio::REST::Client.new
+
+  if bookings = Booking.upcoming.incomplete
     cars = ApiClient.available_cars.map { |car|
       lng = car['coordinates'].first
       lat = car['coordinates'].second
@@ -16,11 +18,19 @@ task :perform_bookings => [:environment] do
         sort_by  { |car| car['distance'] }
 
       cars.each do |car|
-        break if booking.perform!(car['vin'])
+        begin
+          break if booking.perform!(car['vin'])
+        rescue Exception => e
+          Rails.logger.info(e.inspect)
+        end
       end
 
       if booking.complete?
-        # send text notification
+        twilio.messages.create(
+          from: '+16042278434',
+          to: booking.user.phone,
+          body: "car2go booking: #{booking.car_address} ready"
+        )
       else
         # how much time is left? possibly send a warning if only 10 mins left
         # and still nothing
