@@ -43,7 +43,27 @@ global.ListPage = React.createClass({
   renderUpcomingBookings: function() {
     var list = [], self = this;
 
+    if (this.state.upcomingBookings.length == 0) {
+      return (<p className="empty-list-notification">No upcoming bookings!</p>)
+    }
+
     this.state.upcomingBookings.forEach(function(b) {
+      var actions;
+
+      if (b.complete == true) {
+        actions = (
+          <a href="#" className="booking-complete-button">
+            Booked!
+          </a>
+        )
+      } else {
+        actions = (
+          <a href="#" onClick={self.cancelBookingFn(b)}>
+            Cancel
+          </a>
+        )
+      }
+
       list.push(
         <div className="booking">
           <div className="booking--info">
@@ -68,9 +88,7 @@ global.ListPage = React.createClass({
           </div>
 
           <div className="booking--actions">
-            <a href="#" onClick={self.cancelBookingFn(b)}>
-              Cancel
-            </a>
+            {actions}
           </div>
         </div>
       )
@@ -86,6 +104,7 @@ global.ListPage = React.createClass({
         <LoadingOverlay isVisible={this.state.isLoading} />
 
         <div className="container">
+          <h2 className="page-subtitle">Upcoming</h2>
           <div className="card list-page-content">
             {this.renderUpcomingBookings()}
           </div>
