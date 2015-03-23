@@ -206,6 +206,10 @@ $blue: #4A90E2;
   border-bottom: 1px solid #E8E6E6;
   position: relative;
 
+  &:last-child {
+    border-bottom: none;
+  }
+
   .booking--info {
     h2 {
       font-size: 22px;
