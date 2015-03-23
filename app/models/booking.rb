@@ -6,6 +6,10 @@ class Booking < ActiveRecord::Base
     where('time > ?', Time.now)
   end
 
+  def self.within_thirty_minutes
+    where('time >= ? and time <= ?', Time.now, Time.now + 30.minutes)
+  end
+
   def self.complete
     where('time < ? and complete = ?', Time.now, true)
   end
@@ -14,11 +18,25 @@ class Booking < ActiveRecord::Base
     where('time < ? and complete = ?', Time.now, false)
   end
 
+  def perform!(vin)
+    if user.create_booking(vin)
+      update_attributes(complete: true)
+    end
+  end
+
   def address=(new_address)
     if new_address != address
       write_attribute(:address, new_address)
       update_lat_lon_from_address
     end
+  end
+
+  def distance_to(other_location)
+    location.distance_to(other_location)
+  end
+
+  def location
+    Geokit::GeoLoc.new(lat: lat, lng: lon)
   end
 
   def update_lat_lon_from_address

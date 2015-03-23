@@ -1,8 +1,14 @@
+# TODO: Should have retries
 class ApiClient
   OAUTH_CONSUMER_KEY = ENV['CAR2GO_CONSUMER_KEY']
   OAUTH_SECRET_KEY = ENV['CAR2GO_SECRET_KEY']
   OAUTH_VERSION = '1.0'
   OAUTH_SIGNATURE_METHOD = 'HMAC-SHA1'
+
+  def self.available_cars(loc = 'vancouver')
+    url = "http://www.car2go.com/api/v2.1/vehicles?loc=#{loc}&oauth_consumer_key=#{OAUTH_CONSUMER_KEY}&format=json"
+    HTTParty.get(url).parsed_response['placemarks']
+  end
 
   def self.authorization_url(store = {})
     new.authorization_url(store)
@@ -37,6 +43,12 @@ class ApiClient
     store[:oauth_token] = tokens[:oauth_token]
     store[:oauth_token_secret] = tokens[:oauth_token_secret]
     "https://www.car2go.com/api/authorize?oauth_token=#{tokens[:oauth_token]}"
+  end
+
+  def create_booking(vin, account)
+    url = 'https://www.car2go.com/api/v2.1/bookings'
+    HTTParty.post(url + "?format=json&loc=vancouver&vin=#{vin}&account=#{account}",
+                 headers: {'Authorization' => auth_headers(url, :create_booking, vin: vin, account: account)})
   end
 
   def rentals
@@ -109,6 +121,28 @@ class ApiClient
     OAUTH_VERSION
   end
 
+  def parameters_for_booking(vin, account)
+    'account=' + account.to_s +
+    '&format=json' +
+    '&loc=vancouver' +
+    '&oauth_callback=' +
+    'oob' +
+    '&oauth_consumer_key=' +
+    OAUTH_CONSUMER_KEY +
+    '&oauth_nonce=' +
+    oauth_nonce +
+    '&oauth_signature_method=' +
+    OAUTH_SIGNATURE_METHOD +
+    '&oauth_timestamp=' +
+    oauth_timestamp +
+    '&oauth_token=' +
+    oauth_token +
+    '&oauth_version=' +
+    OAUTH_VERSION +
+    '&vin=' +
+    vin
+  end
+
   def auth_parameters
     'oauth_callback=' +
     'oob' +
@@ -128,13 +162,18 @@ class ApiClient
     OAUTH_VERSION
   end
 
-  def auth_headers(url, for_authentication = false)
+  def auth_headers(url, type = :normal, options = {})
     signature = nil
     headers = nil
 
-    if for_authentication
+    if type == :for_authentication
       signature = oauth_signature(url, 'POST', auth_parameters)
       headers = base_auth_headers_with_verifier
+    elsif type == :create_booking
+      signature = oauth_signature(url, 'POST',
+                                  parameters_for_booking(options[:vin], options[:account]))
+      headers = base_auth_headers
+      byebug
     else
       signature = oauth_signature(url)
       headers = base_auth_headers

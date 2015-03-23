@@ -3,10 +3,6 @@ class User < ActiveRecord::Base
   has_many :bookings
   validates :email, uniqueness: true
 
-  # def make_reservation(id)
-  #   api_client.reserve(id)
-  # end
-
   def rentals
     @rentals ||= api_client.rentals.map { |rental|
       Rental.new(rental)
@@ -19,6 +15,10 @@ class User < ActiveRecord::Base
 
   def account_id
     @account_id ||= accounts.first['accountId']
+  end
+
+  def create_booking(vin)
+    api_client.create_booking(vin, account_id)
   end
 
   private
