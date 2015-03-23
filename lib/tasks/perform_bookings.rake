@@ -3,7 +3,7 @@ MAXIMUM_DISTANCE = 750
 task :perform_bookings => [:environment] do
   twilio = Twilio::REST::Client.new
 
-  if bookings = Booking.upcoming.incomplete
+  if bookings = Booking.within_thirty_minutes.incomplete
     cars = ApiClient.available_cars.map { |car|
       lng = car['coordinates'].first
       lat = car['coordinates'].second
