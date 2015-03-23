@@ -1,5 +1,6 @@
 class Booking < ActiveRecord::Base
   belongs_to :user
+  validates :address, :lat, :lon, :time, :title, presence: true
 
   def self.upcoming
     where('time > ?', Time.now)

@@ -19,15 +19,15 @@ global.NewBookingPage = React.createClass({
       title: this.state.title, date: this.state.date, time: this.state.time,
       address: this.state.address
     }};
-    $.post('/bookings', data).complete(function(response) {
-      self.setState({isLoading: false});
-
+    $.post('/bookings', data).done(function(response) {
       if (response.success == true) {
         window.location.href = '/'
       } else {
         alert('Something went wrong')
       }
-    })
+    }).complete(function() {
+      self.setState({isLoading: false});
+    });
   },
 
   renderForm: function() {
@@ -49,7 +49,7 @@ global.NewBookingPage = React.createClass({
 
         <div className="form--actions">
           <button className="medium-button">Save</button>
-          <button className="medium-button cancel-button">Cancel</button>
+          <a href="/" className="medium-button cancel-button">Cancel</a>
         </div>
       </form>
     )
