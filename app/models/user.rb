@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_secure_password
+  has_many :bookings
 
   # def make_reservation(id)
   #   api_client.reserve(id)
@@ -12,7 +13,11 @@ class User < ActiveRecord::Base
   end
 
   def accounts
-    api_client.accounts
+    @accounts ||= api_client.accounts
+  end
+
+  def account_id
+    @account_id ||= accounts.first['accountId']
   end
 
   private

@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322223317) do
+ActiveRecord::Schema.define(version: 20150322234851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "time"
+    t.string   "address"
+    t.float    "lat"
+    t.float    "lon"
+    t.boolean  "complete"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "oauth_token_secret"

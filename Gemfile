@@ -11,6 +11,8 @@ gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'httparty'
 gem 'autoprefixer-rails'
 gem 'bcrypt', '~> 3.1.7'
+gem 'geokit'
+gem 'active_model_serializers'
 
 group :production do
   gem 'unicorn'

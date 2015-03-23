@@ -3,6 +3,13 @@ Rails.application.routes.draw do
   post '/auth' => 'authentication#create'
   resources :users
 
+  resources :bookings do
+    collection do
+      get :upcoming
+      get :complete
+    end
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

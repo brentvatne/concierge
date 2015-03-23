@@ -1,5 +1,5 @@
 <% if current_user.present? %>
-  <h2>Hello there <%= current_user.name %>!
+  <%= react_component 'ListPage', {upcomingBookings: @upcoming_bookings} %>
 <% else %>
   <%= react_component 'LoginPage', {authorizationUrl: @authorization_url} %>
 <% end %>

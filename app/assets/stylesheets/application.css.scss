@@ -16,6 +16,8 @@
 
 html {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 *, *:before, *:after {
@@ -33,12 +35,12 @@ h1,h2,h3,h4,h5,h6,p,span,div {
 }
 
 .container {
+  position: relative;
   width: 1140px;
   margin: 0 auto;
 }
 
 .card {
-  width: 600px;
   padding: 20px;
   background: #fff;
   box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.14);
@@ -82,6 +84,8 @@ $blue: #4A90E2;
 }
 
 .login-box {
+  width: 600px;
+
   input[type=text], input[type=email], input[type=password] {
     width: 100%;
     font-size: 16px;
@@ -103,6 +107,94 @@ $blue: #4A90E2;
 
     &:focus {
       outline: none;
+    }
+  }
+}
+
+.primary-navigation {
+  background: #4A90E2;
+  border: 1px solid #979797;
+  width: 100%;
+  height: 60px;
+  margin-bottom: 20px;
+  position: relative;
+  padding-top: 8px;
+
+  h1 {
+    color: #fff;
+    margin: 0;
+    font-size: 30px;
+  }
+
+  .primary-navigation--actions {
+    position: absolute;
+    right: 0;
+    top: 2px;
+
+    a {
+      display: inline-block;
+      background: #F9F9F9;
+      // box-shadow: 0px 2px 8px 2px rgba(0,0,0,0.20);
+      padding: 9px 25px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #918B8B;
+      font-weight: 600;
+      font-size: 15px;
+
+      &:hover {
+        color: #ccc;
+      }
+    }
+  }
+}
+
+.list-page-content {
+  width: 100%;
+  text-align: left;
+  padding: 0;
+}
+
+.booking {
+  padding: 20px;
+  border-bottom: 1px solid #E8E6E6;
+  position: relative;
+  margin-bottom: 20px;
+
+  .booking--info {
+    h2 {
+      font-size: 22px;
+      margin: 0 0 5px 0;
+    }
+
+    .booking--info--date-time {
+      color: #666;
+      margin: 5px 0;
+
+      .time {
+        font-weight: bold;
+      }
+
+      .date {
+      }
+    }
+
+    .booking--info--location {
+      margin: 0;
+    }
+  }
+
+  .booking--actions {
+    position: absolute;
+    right: 40px;
+    top: 30px;
+
+    a {
+      background: #eee;
+      padding: 20px 40px;
+      color: #888;
+      text-decoration: none;
+      display: inline-block;
     }
   }
 }

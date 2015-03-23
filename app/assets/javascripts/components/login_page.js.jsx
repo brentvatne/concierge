@@ -87,10 +87,12 @@ global.LoginPage = React.createClass({
       )
     }
     return (
-      <div className="login-box card">
-        <h1>Car2Go Concierge</h1>
+      <div className="container">
+        <div className="login-box card">
+          <h1>Car2Go Concierge</h1>
 
-        {action}
+          {action}
+        </div>
       </div>
     )
   },
