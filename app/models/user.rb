@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
   has_many :bookings
+  validates :email, unique: true
 
   # def make_reservation(id)
   #   api_client.reserve(id)
