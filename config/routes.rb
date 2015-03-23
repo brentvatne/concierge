@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'pages#home'
+  get '/auth/new' => 'authentication#new'
   post '/auth' => 'authentication#create'
   resources :users
 

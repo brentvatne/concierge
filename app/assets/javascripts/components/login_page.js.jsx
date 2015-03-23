@@ -2,7 +2,8 @@ global.LoginPage = React.createClass({
   getInitialState: function() {
     return {
       waitingForVerifier: false,
-      waitingForUserInfo: false
+      waitingForUserInfo: false,
+      isLoading: false
     }
   },
 
@@ -10,16 +11,21 @@ global.LoginPage = React.createClass({
     this.setState({waitingForVerifier: true});
   },
 
-  // TODO: show loading ("verifying ...")
-  // TODO: handle errors, right now assuming that it cannot fail
   submitVerificationCode: function(e) {
-    e.preventDefault()
+    e.preventDefault();
     var verificationCode = this.refs.verifierInput.getDOMNode().value,
         self = this;
 
+    this.setState({isLoading: true});
+
     $.post('/auth', {verificationCode: verificationCode}).
       done(function(response) {
-        self.setState({waitingForVerifier: false, waitingForUserInfo: true});
+        if (response.success == true) {
+          self.setState({waitingForVerifier: false, waitingForUserInfo: true});
+        } else {
+          alert('Hmm, that did not seem to work. Did you copy the code properly?')
+        }
+        self.setState({isLoading: false});
       });
   },
 
@@ -44,8 +50,7 @@ global.LoginPage = React.createClass({
       action = (
         <form className="verifier-input-wrapper"
               onSubmit={this.submitVerificationCode}>
-          <img src="http://url.brentvatne.ca/dCaF.png" /> 
-          <input type="text" ref="verifierInput"
+          <input key="verifier" type="text" ref="verifierInput"
             placeholder="Enter your verification code here" />
           <button className="big-button">
              Continue
@@ -77,7 +82,7 @@ global.LoginPage = React.createClass({
             know that a car will be ready for you
             when you need it.
           </p>
-          <a href={this.props.authorizationUrl}
+          <a href="/auth/new"
              onClick={this.toggleVerifierInput}
              target="_blank"
              className="big-button">
@@ -87,11 +92,14 @@ global.LoginPage = React.createClass({
       )
     }
     return (
-      <div className="container">
-        <div className="login-box card">
-          <h1>Car2Go Concierge</h1>
+      <div>
+        <LoadingOverlay isVisible={this.state.isLoading} />
+        <div className="container">
+          <div className="login-box card">
+            <h1>Car2Go Concierge</h1>
 
-          {action}
+            {action}
+          </div>
         </div>
       </div>
     )

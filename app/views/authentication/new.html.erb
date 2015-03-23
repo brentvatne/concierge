@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="login-box card">
+    <h1>Read this first</h1>
+    <p>This should have opened in a new window. Car2Go doesn't yet have a slick
+    way of integrating with 3rd party apps, so once you have approved access
+    <strong>we'll need you to copy the verification code then close this popup and
+    paste the code into the verfication code field back on our site</strong>.<br />
+    Allow me to demonstrate:</p>
+
+    <%= image_tag 'auth-flow.gif', class: 'auth-flow-example' %>
+
+    <a href="<%= @authorization_url %>" class="big-button">
+      Got it, let's do this
+    </a>
+  </div>
+</div>

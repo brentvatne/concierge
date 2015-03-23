@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require spinkit/spinkit
  */
 
 html {
@@ -36,7 +37,7 @@ h1,h2,h3,h4,h5,h6,p,span,div {
 
 .container {
   position: relative;
-  width: 1140px;
+  max-width: 1140px;
   margin: 0 auto;
 }
 
@@ -59,7 +60,7 @@ h1,h2,h3,h4,h5,h6,p,span,div {
 }
 
 .login-box {
-  margin-top: 70px;
+  margin-top: 30px;
 }
 
 $blue: #4A90E2;
@@ -84,7 +85,7 @@ $blue: #4A90E2;
 }
 
 .login-box {
-  width: 600px;
+  max-width: 650px;
 
   input[type=text], input[type=email], input[type=password] {
     width: 100%;
@@ -196,5 +197,41 @@ $blue: #4A90E2;
       text-decoration: none;
       display: inline-block;
     }
+  }
+}
+
+.auth-flow-example {
+  max-width: 100%;
+  box-shadow: 0px 2px 15px 5px rgba(0, 0, 0, 0.09);
+  margin-bottom: 20px;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 1000;
+  display: none;
+
+  &.loading-overlay--is-visible {
+    display: block;
+  }
+
+  .loading-overlay--animation {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .sk-dot1 {
+    background: rgba(8, 78, 93, 1);
+  }
+
+  .sk-dot2 {
+    background: #2A4480;
   }
 }
