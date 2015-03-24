@@ -74,10 +74,10 @@ global.ListPage = React.createClass({
         location = (
           <span className="booked-location">
             <span className="booked-location--label">
-            Car <strong>{b.carLicensePlate} booked at: </span>
-            <span className="booked-location--address">
+            Car <strong>{b.carLicensePlate}</strong> booked at: </span>
+            <strong className="booked-location--address">
               {b.carAddress}
-            </span>
+            </strong>
           </span>
         )
       } else if (b.complete == false && self.state.view == 'upcoming') {
