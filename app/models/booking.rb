@@ -10,6 +10,11 @@ class Booking < ActiveRecord::Base
     where('complete = ?', false)
   end
 
+  def self.upcoming_or_active
+    where('time > ? or (complete = ? and car_booked_time <= ? and time > ?)',
+          Time.now, true, Time.now - 30.minutes, Time.now - 30.minutes)
+  end
+
   def self.within_booking_window
     where('time >= ? and time <= ?', Time.now, Time.now + 25.minutes)
   end
@@ -30,7 +35,8 @@ class Booking < ActiveRecord::Base
     if car = user.create_booking(vin)
       update_attributes(complete: true,
                         car_address: car[:address],
-                        car_booked_time: car[:time])
+                        car_booked_time: car[:time],
+                        car_license_plate: car[:license_plate])
     end
   end
 

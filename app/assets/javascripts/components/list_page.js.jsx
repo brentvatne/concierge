@@ -61,13 +61,24 @@ global.ListPage = React.createClass({
     }
 
     bookings.forEach(function(b) {
-      var actions;
+      var actions,
+          location = (<span>Near {b.address}</span>);
 
       if (b.complete == true) {
         actions = (
           <a href="#" className="booking-complete-button">
             Booked!
           </a>
+        )
+
+        location = (
+          <span className="booked-location">
+            <span className="booked-location--label">
+            Car <strong>{b.carLicensePlate} booked at: </span>
+            <span className="booked-location--address">
+              {b.carAddress}
+            </span>
+          </span>
         )
       } else if (b.complete == false && self.state.view == 'upcoming') {
         actions = (
@@ -94,9 +105,7 @@ global.ListPage = React.createClass({
             </p>
 
             <p className="booking--info--location">
-              <span>
-                Near {b.address}
-              </span>
+              <span>{location}</span>
             </p>
           </div>
 
