@@ -15,6 +15,7 @@ gem 'geokit'
 gem 'active_model_serializers'
 gem 'chronic'
 gem 'twilio-ruby'
+gem 'clockwork'
 
 group :production do
   gem 'unicorn'
