@@ -59,7 +59,7 @@ class ApiClient
 
     {address: response['bookingposition']['address'],
      time: Time.at(response['reservationTime']['timeInMillis']),
-     license_plate: response['name']) }
+     license_plate: response['name'] }
   end
 
   def rentals
