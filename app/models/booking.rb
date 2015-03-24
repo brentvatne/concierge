@@ -10,12 +10,16 @@ class Booking < ActiveRecord::Base
     where('complete = ?', false)
   end
 
-  def self.within_thirty_minutes
-    where('time >= ? and time <= ?', Time.now, Time.now + 30.minutes)
+  def self.within_booking_window
+    where('time >= ? and time <= ?', Time.now, Time.now + 25.minutes)
   end
 
   def self.complete
     where('time < ? and complete = ?', Time.now, true)
+  end
+
+  def self.past
+    where('time < ?', Time.now)
   end
 
   def self.past_and_incomplete

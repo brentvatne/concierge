@@ -321,6 +321,22 @@ $blue: #4A90E2;
   margin-bottom: 15px;
   font-weight: 300;
   padding-left: 5px;
+
+  .page-subtitle--link {
+    color: #ccc;
+    text-decoration: none;
+    margin-right: 15px;
+    letter-spacing: -1px;
+
+    &.active {
+      color: #B2B1B1;
+      font-weight: 500;
+    }
+
+    &:hover, &.active:hover {
+      color: #888;
+    }
+  }
 }
 
 .empty-list-notification {

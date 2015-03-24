@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :bookings do
     collection do
       get :upcoming
-      get :complete
+      get :past
     end
   end
 

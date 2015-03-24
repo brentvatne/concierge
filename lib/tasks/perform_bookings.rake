@@ -1,7 +1,7 @@
 task :perform_bookings => [:environment] do
   twilio = Twilio::REST::Client.new
 
-  if bookings = Booking.within_thirty_minutes.incomplete
+  if bookings = Booking.within_booking_window.incomplete
     cars = ApiClient.available_cars.map { |car|
       lng = car['coordinates'].first
       lat = car['coordinates'].second
@@ -28,11 +28,15 @@ task :perform_bookings => [:environment] do
 
       if booking.complete?
         puts "sending text.."
-        twilio.messages.create(
-          from: '+16042278434',
-          to: booking.user.phone,
-          body: "car2go booking: #{booking.car_address} ready"
-        )
+        begin
+          twilio.messages.create(
+            from: '+16042278434',
+            to: booking.user.phone,
+            body: "car2go booking: #{booking.car_address} ready"
+          )
+        rescue Exception => e
+          Rails.logger.info(e.backtrace)
+        end
       else
         puts "nothing close enough.."
         # how much time is left? possibly send a warning if only 10 mins left

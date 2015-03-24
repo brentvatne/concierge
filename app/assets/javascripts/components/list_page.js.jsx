@@ -2,9 +2,18 @@ global.ListPage = React.createClass({
   getInitialState: function() {
     return {
       upcomingBookings: [],
-      completedBookings: [],
-      isLoading: false
+      pastBookings: [],
+      isLoading: false,
+      view: 'upcoming'
     }
+  },
+
+  showPastBookings: function() {
+    this.setState({view: 'past'});
+  },
+
+  showUpcomingBookings: function() {
+    this.setState({view: 'upcoming'});
   },
 
   componentDidMount: function() {
@@ -38,16 +47,20 @@ global.ListPage = React.createClass({
     $.get('/bookings/upcoming', function(response) {
       self.setState({upcomingBookings: response})
     })
+
+    $.get('/bookings/past', function(response) {
+      self.setState({pastBookings: response})
+    })
   },
 
-  renderUpcomingBookings: function() {
+  renderBookings: function(bookings) {
     var list = [], self = this;
 
-    if (this.state.upcomingBookings.length == 0) {
-      return (<p className="empty-list-notification">No upcoming bookings!</p>)
+    if (bookings == 0) {
+      return (<p className="empty-list-notification">No {this.state.view} bookings!</p>)
     }
 
-    this.state.upcomingBookings.forEach(function(b) {
+    bookings.forEach(function(b) {
       var actions;
 
       if (b.complete == true) {
@@ -56,7 +69,7 @@ global.ListPage = React.createClass({
             Booked!
           </a>
         )
-      } else {
+      } else if (b.complete == false && self.state.view == 'upcoming') {
         actions = (
           <a href="#" onClick={self.cancelBookingFn(b)}>
             Cancel
@@ -98,15 +111,33 @@ global.ListPage = React.createClass({
   },
 
   render: function() {
+    var cx = React.addons.classSet, bookings,
+        upcomingClasses = cx({'page-subtitle--link': true,
+                              'active': this.state.view == 'upcoming'}),
+        pastClasses = cx({'page-subtitle--link': true,
+                          'active': this.state.view == 'past'});
+
+    if (this.state.view == 'upcoming') {
+      bookings = this.state.upcomingBookings;
+    } else {
+      bookings = this.state.pastBookings;
+    }
+
     return (
       <div>
         <PrimaryNavigation showScheduleBooking={true} />
         <LoadingOverlay isVisible={this.state.isLoading} />
 
         <div className="container">
-          <h2 className="page-subtitle">Upcoming</h2>
+          <h2 className="page-subtitle">
+            <a href="#" className={upcomingClasses}
+               onClick={this.showUpcomingBookings}>Upcoming</a>
+
+             <a href="#" className={pastClasses}
+               onClick={this.showPastBookings}>Past</a>
+          </h2>
           <div className="card list-page-content">
-            {this.renderUpcomingBookings()}
+            {this.renderBookings(bookings)}
           </div>
         </div>
       </div>
