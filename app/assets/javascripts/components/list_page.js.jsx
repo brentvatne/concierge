@@ -107,7 +107,7 @@ global.ListPage = React.createClass({
               <span>, </span>
 
               <span className="date">
-                {b.date}
+                {b.day}, {b.date}
               </span>
             </p>
 

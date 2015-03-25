@@ -16,9 +16,18 @@ class BookingsController < ApplicationController
     render json: {success: true}
   end
 
+  def edit
+    @booking = Booking.find(params[:id])
+  end
+
   def cancel
     @booking = Booking.find(params[:id])
-    render json: {success: @booking.cancel!}
+    if @booking.cancel!
+      @booking.destroy
+      render json: {success: true}
+    else
+      render json: {success: false}
+    end
   end
 
   def destroy
@@ -37,6 +46,22 @@ class BookingsController < ApplicationController
 
     if @booking.persisted?
       render json: {success: true, id: @booking.id}
+    else
+      render json: {success: false}
+    end
+  end
+
+  def update
+    time = Chronic.parse("#{booking_params[:date]} at #{booking_params[:time]}")
+    @booking = Booking.find(params[:id])
+    @booking.update_attributes(
+      title: booking_params[:title],
+      address: booking_params[:address],
+      time: time
+    )
+
+    if @booking.valid?
+      render json: {success: true}
     else
       render json: {success: false}
     end

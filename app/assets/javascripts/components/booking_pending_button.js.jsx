@@ -16,11 +16,24 @@ global.BookingPendingButton = React.createClass({
     this.props.onDelete(e);
   },
 
+  editBooking: function(e) {
+    e.preventDefault()
+    this.setState({isLoading: true});
+    window.location.href = "/bookings/" + this.props.bookingId + "/edit"
+  },
+
   render: function() {
     var self = this,
         cx = React.addons.classSet,
+        editLink,
         optionsListClasses = cx({'link-options-list': true,
                                  'active': this.state.menuIsOpen});
+
+    if (this.props.stage == "upcoming") {
+      editLink = (
+        <a href="#" onClick={self.editBooking}>Edit this</a>
+      )
+    }
 
     return (
       <div>
@@ -33,6 +46,7 @@ global.BookingPendingButton = React.createClass({
         </a>
 
         <div className={optionsListClasses}>
+          {editLink}
           <a href="#" onClick={self.deleteBooking}>Delete this</a>
         </div>
       </div>

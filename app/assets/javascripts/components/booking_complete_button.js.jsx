@@ -26,13 +26,17 @@ global.BookingCompleteButton = React.createClass({
   render: function() {
     var self = this,
         cx = React.addons.classSet,
-        cancelReservationLink,
+        action,
         optionsListClasses = cx({'link-options-list': true,
                                  'active': this.state.menuIsOpen});
 
      if (this.props.stage == 'upcoming') {
-       cancelReservationLink = (
+       action = (
          <a href="#" onClick={self.cancelReservation}>Cancel reservation</a>
+       )
+     } else {
+       action = (
+        <a href="#" onClick={self.deleteBooking}>Done, delete this</a>
        )
      }
 
@@ -47,8 +51,7 @@ global.BookingCompleteButton = React.createClass({
         </a>
 
         <div className={optionsListClasses}>
-          {cancelReservationLink}
-          <a href="#" onClick={self.deleteBooking}>Done, delete this</a>
+          {action}
         </div>
       </div>
     )

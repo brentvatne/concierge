@@ -1,4 +1,7 @@
-global.NewBookingPage = React.createClass({
+global.EditBookingPage = React.createClass({
+  getDefaultProps: function() {
+    return { booking: {} }
+  },
 
   getInitialState: function() {
     return {
@@ -12,7 +15,7 @@ global.NewBookingPage = React.createClass({
 
     this.setState({isLoading: true});
 
-    $.post('/bookings', data).done(function(response) {
+    $.put('/bookings/' + this.props.booking.id, data).done(function(response) {
       if (response.success == true) {
         window.location.href = '/'
       } else {
@@ -31,10 +34,10 @@ global.NewBookingPage = React.createClass({
         <LoadingOverlay isVisible={this.state.isLoading} />
 
         <div className="container">
-          <h2 className="page-subtitle">Schedule a new booking</h2>
+          <h2 className="page-subtitle">Edit booking</h2>
 
           <div className="card list-page-content">
-            <BookingForm onSubmit={this.submitForm} />
+            <BookingForm onSubmit={this.submitForm} booking={this.props.booking} />
           </div>
         </div>
       </div>

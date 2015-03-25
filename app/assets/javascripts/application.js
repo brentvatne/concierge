@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require_self
 //= require react
 //= require react_ujs
 //= require components
@@ -22,3 +23,19 @@ $.ajaxSetup({
     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
   }
 });
+
+$.put = function(url, data, callback, type){
+  if ( $.isFunction(data) ){
+    type = type || callback,
+    callback = data,
+    data = {}
+  }
+
+  return $.ajax({
+    url: url,
+    type: 'PUT',
+    success: callback,
+    data: data,
+    contentType: type
+  });
+}
