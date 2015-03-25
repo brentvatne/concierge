@@ -16,10 +16,12 @@ global.LoginPage = React.createClass({
     this.setState({showExistingAccountForm: !this.state.showExistingAccountForm});    
   },
 
-  submitExistingAccountForm: function() {
+  submitExistingAccountForm: function(e) {
     var email = this.refs.emailInput.getDOMNode().value,
         password = this.refs.passwordInput.getDOMNode().value,
         self = this;
+
+    e.preventDefault();
 
     this.setState({isLoading: true});
 
