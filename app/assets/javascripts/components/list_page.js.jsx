@@ -3,7 +3,7 @@ global.ListPage = React.createClass({
 
   getInitialState: function() {
     return {
-      upcomingBookings: [],
+      upcomingBookings: this.props.upcomingBookings,
       pastBookings: [],
       isLoading: false,
       view: 'upcoming'
