@@ -406,6 +406,10 @@ $blue: #4A90E2;
 .form--actions {
   margin-top: 10px;
 
+  @include desktop {
+    margin-bottom: 15px;
+  }
+
   @include mobile {
     button, a {
       display: block !important;
