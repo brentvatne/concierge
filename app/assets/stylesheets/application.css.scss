@@ -508,3 +508,9 @@ $blue: #4A90E2;
     display: none;
   }
 }
+
+.go-home-link {
+  @include mobile {
+    width: 100%;
+  }
+}

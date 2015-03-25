@@ -23,7 +23,7 @@ global.PrimaryNavigation = React.createClass({
 
     if (this.props.showBackHome) {
       links.push(
-        <a href="/">
+        <a href="/" className="go-home-link">
           Go back home
         </a>
       )
