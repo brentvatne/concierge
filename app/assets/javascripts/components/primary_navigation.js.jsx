@@ -1,6 +1,7 @@
 global.PrimaryNavigation = React.createClass({
   getDefaultProps: function() {
     return {
+      extraClasses: '',
       showScheduleBooking: false,
       showBackHome: false
     }
@@ -30,7 +31,7 @@ global.PrimaryNavigation = React.createClass({
     }
 
     return (
-      <div className="primary-navigation">
+      <div className={"primary-navigation " + this.props.extraClasses}>
         <div className="container">
           <h1>Concierge</h1>
 
