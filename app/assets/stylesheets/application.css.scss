@@ -214,6 +214,7 @@ $blue: #4A90E2;
     @include mobile {
       font-size: 20px;
       padding-top: 6px;
+      display: none;
     }
   }
 
@@ -222,15 +223,25 @@ $blue: #4A90E2;
     right: 0;
     top: 2px;
 
-    a {
-      &.green {
-        background: #19AF39;
-        color: #fff; 
-      }
+    @include mobile {
+      position: static;
+    }
 
-      &.blue {
-        background: rgb(25, 63, 175);
-        color: #fff;
+    a {
+      @include mobile {
+        text-align: center;
+
+        &.green {
+          background: #19AF39;
+          color: #fff; 
+          width: 47%;
+        }
+
+        &.blue {
+          background: rgb(25, 63, 175);
+          color: #fff;
+          width: 47%;
+        }
       }
 
       box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
