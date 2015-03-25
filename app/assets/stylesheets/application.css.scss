@@ -352,6 +352,11 @@ $blue: #4A90E2;
       display: inline-block;
       box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.13);
 
+      @include desktop {
+        width: 150px;
+        text-align: center;
+      }
+
       @include mobile {
         width: 100%;
         text-align: center;
@@ -485,8 +490,8 @@ $blue: #4A90E2;
 }
 
 .booking-complete-button {
-  background: rgb(224, 161, 45) !important;
-  color: rgb(255, 219, 154) !important;
+  background: #FFA500 !important;
+  color: #FFFFFF !important;
 }
 
 .highlight-header {
@@ -499,13 +504,13 @@ $blue: #4A90E2;
 
 .desktop-only {
   @include mobile {
-    display: none;
+    display: none !important;
   }
 }
 
 .mobile-only {
   @include desktop {
-    display: none;
+    display: none !important;
   }
 }
 
@@ -513,4 +518,13 @@ $blue: #4A90E2;
   @include mobile {
     width: 97%;
   }
+}
+
+.in-progress-badge {
+  font-size: 14px;
+  vertical-align: middle;
+  display: inline-block;
+  background: yellow;
+  margin-left: 10px;
+  margin-bottom: 2px;
 }

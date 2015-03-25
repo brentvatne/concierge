@@ -1,4 +1,6 @@
 global.ListPage = React.createClass({
+  mixins: [HasTimer],
+
   getInitialState: function() {
     return {
       upcomingBookings: [],
@@ -8,16 +10,17 @@ global.ListPage = React.createClass({
     }
   },
 
+  componentDidMount: function() {
+    this.loadBookings();
+    this.setInterval(this.loadBookings, 45000);
+  },
+
   showPastBookings: function() {
     this.setState({view: 'past'});
   },
 
   showUpcomingBookings: function() {
     this.setState({view: 'upcoming'});
-  },
-
-  componentDidMount: function() {
-    this.loadUpcomingBookings();
   },
 
   cancelBookingFn: function(booking) {
@@ -41,7 +44,7 @@ global.ListPage = React.createClass({
     }
   },
 
-  loadUpcomingBookings: function() {
+  loadBookings: function() {
     var self = this;
 
     $.get('/bookings/upcoming', function(response) {
@@ -62,7 +65,14 @@ global.ListPage = React.createClass({
 
     bookings.forEach(function(b) {
       var actions,
-          location = (<span>Near {b.address}</span>);
+          location = (<span>Near {b.address}</span>),
+          badge;
+
+      if (b.inProgress == true && b.complete == false) {
+        badge = (
+          <span className="in-progress-badge">Searching...</span>
+        )
+      }
 
       if (b.complete == true) {
         actions = (
@@ -91,7 +101,7 @@ global.ListPage = React.createClass({
       list.push(
         <div className="booking">
           <div className="booking--info">
-            <h2>{b.title}</h2>
+            <h2>{b.title}{badge}</h2>
             <p className="booking--info--date-time">
               <span className="time">
                 {b.time}

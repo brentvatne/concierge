@@ -59,7 +59,7 @@ class ApiClient
     response = response.parsed_response['booking'].first
 
     {address: response['bookingposition']['address'],
-     time: Time.at(response['reservationTime']['timeInMillis']),
+     time: Time.at(response['reservationTime']['timeInMillis'] / 1000),
      license_plate: response['vehicle']['numberPlate'],
      reservation_id: response['bookingId'],
      full_response: response }

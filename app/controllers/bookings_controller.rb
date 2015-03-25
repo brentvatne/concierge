@@ -11,6 +11,8 @@ class BookingsController < ApplicationController
       asap: true
     )
 
+    PerformBookings.execute(@booking)
+
     render json: {success: true}
   end
 
@@ -43,7 +45,8 @@ class BookingsController < ApplicationController
 
   def past
     @bookings = current_user.bookings.past.order('time DESC')
-    @bookings.to_a.map! { |b| BookingSerializer.new(b, root: false) }
+    @bookings = @bookings.to_a - current_user.bookings.upcoming_or_active.order('time ASC').to_a
+    @bookings.map! { |b| BookingSerializer.new(b, root: false) }
     render json: @bookings
   end
 

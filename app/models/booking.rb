@@ -11,8 +11,12 @@ class Booking < ActiveRecord::Base
   end
 
   def self.upcoming_or_active
-    where('time > ? or (complete = ? and car_booked_time <= ? and time > ?) or (asap = ? and time < ?)',
-          Time.now, true, Time.now - 30.minutes, Time.now - 30.minutes, true, Time.now - 30.minutes)
+    where('time > ? or
+          (complete = ? and car_booked_time > ?) or
+          (asap = ? and complete = ?)',
+          Time.now,
+          true, Time.now - 30.minutes,
+          true, false)
   end
 
   def self.within_booking_window
@@ -54,7 +58,7 @@ class Booking < ActiveRecord::Base
   def location=(coords)
     write_attribute(:lat, coords[:lat])
     write_attribute(:lon, coords[:lon])
-    write_attribute(:address, 'Current Location')
+    write_attribute(:address, 'your current location')
   end
 
   def distance_to(other_location)
