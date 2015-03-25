@@ -301,6 +301,10 @@ $blue: #4A90E2;
       }
     }
 
+    .booked-license-plate {
+      color: rgba(0,0,0,0.8);
+    }
+
     .booking--info--date-time {
       color: #666;
       margin: 5px 0;
@@ -311,7 +315,7 @@ $blue: #4A90E2;
       }
 
       .time {
-        font-weight: bold;
+        // font-weight: bold;
       }
 
       .date {
@@ -328,6 +332,8 @@ $blue: #4A90E2;
     }
 
     .booked-location--address {
+      color: rgba(0,0,0,0.8);
+
       @include mobile {
         font-size: 15px;
       }

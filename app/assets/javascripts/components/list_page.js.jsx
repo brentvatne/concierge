@@ -82,10 +82,11 @@ global.ListPage = React.createClass({
         location = (
           <span className="booked-location">
             <span className="booked-location--label">
-            <strong>{b.carLicensePlate}</strong> </span>
-            <strong className="booked-location--address">
+            <span className="booked-license-plate">{b.carLicensePlate}</span> at </span>
+            <a href={"https://www.google.ca/maps/dir//" + b.carAddress}
+               className="booked-location--address" target="_blank">
               {b.carAddress}
-            </strong>
+            </a>
           </span>
         )
       } else if (b.complete == false) {
