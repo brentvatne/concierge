@@ -134,7 +134,7 @@ global.ListPage = React.createClass({
 
     return (
       <div>
-        <PrimaryNavigation showScheduleBooking={true} />
+        <PrimaryNavigation showBookNow={true} showScheduleBooking={true} />
         <LoadingOverlay isVisible={this.state.isLoading} />
 
         <div className="container">

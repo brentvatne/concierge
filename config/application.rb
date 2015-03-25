@@ -31,6 +31,7 @@ module Concierge
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.autoload_paths += %W(#{config.root}/app/serializers)
+    config.autoload_paths += %W(#{config.root}/app/services)
     config.react.addons = true
 
     # Do not swallow errors in after_commit/after_rollback callbacks.

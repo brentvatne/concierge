@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :sessions
 
   get '/new-booking' => 'bookings#new'
+  post '/book-now' => 'bookings#now'
   resources :bookings do
     collection do
       get :upcoming

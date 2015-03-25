@@ -9,6 +9,10 @@ global.PrimaryNavigation = React.createClass({
   render: function() {
     var links = [];
 
+    if (this.props.showBookNow) {
+      links.push(<BookNowButton />)
+    }
+
     if (this.props.showScheduleBooking) {
       links.push(
         <a href="/new-booking">

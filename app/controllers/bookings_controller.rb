@@ -3,6 +3,17 @@ class BookingsController < ApplicationController
   def new
   end
 
+  def now
+    @booking = current_user.bookings.create(
+      title: 'Get me a car now!',
+      location: {lat: params[:lat], lon: params[:lon]},
+      time: Time.now,
+      asap: true
+    )
+
+    render json: {success: true}
+  end
+
   def destroy
     @booking = Booking.find(params[:id])
     render json: {success: !!@booking.destroy}
