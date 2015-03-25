@@ -59,7 +59,7 @@ global.NewBookingPage = React.createClass({
   render: function() {
     return (
       <div>
-        <PrimaryNavigation showBackHome={true} extraClasses="desktop-only" />
+        <PrimaryNavigation showBackHome={true} extraClasses="" />
         <LoadingOverlay isVisible={this.state.isLoading} />
 
         <div className="container">
