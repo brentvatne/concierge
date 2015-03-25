@@ -16,3 +16,9 @@
 //= require react_ujs
 //= require components
 //= require_tree .
+
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  }
+});
