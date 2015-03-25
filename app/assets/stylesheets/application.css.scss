@@ -131,7 +131,6 @@ $blue: #4A90E2;
 
   @include mobile {
     font-size: 14px;
-    display: none;
   }
 }
 
@@ -285,11 +284,17 @@ $blue: #4A90E2;
 
   @include mobile {
     padding: 10px;
+
+    &:last-child {
+      padding-bottom: 0 !important;
+    }
   }
+
 
   &:last-child {
     border-bottom: none;
   }
+
 
   .booking--info {
     h2 {
