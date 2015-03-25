@@ -36,6 +36,25 @@ class Booking < ActiveRecord::Base
     where('time < ? and complete = ?', Time.now, false)
   end
 
+  def cancel!
+    return false if complete? == false || reservation_id.blank?
+
+    if user.cancel_booking(reservation_id)
+      clear_booking_attributes!
+      true
+    end
+  end
+
+  def clear_booking_attributes!
+    update_attributes(complete: false,
+                      in_progress: false,
+                      car_address: nil,
+                      car_booked_time: nil,
+                      car_license_plate: nil,
+                      reservation_id: nil,
+                      reservation_response: nil)
+  end
+
   def perform!(vin)
     if car = user.create_booking(vin)
       update_attributes(complete: true,

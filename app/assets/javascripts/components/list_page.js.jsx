@@ -76,9 +76,7 @@ global.ListPage = React.createClass({
 
       if (b.complete == true) {
         actions = (
-          <a href="#" className="booking-complete-button">
-            Booked!
-          </a>
+          <BookingCompleteButton bookingId={b.id} stage={self.state.view} onDelete={self.cancelBookingFn(b)}/>
         )
 
         location = (
@@ -90,11 +88,9 @@ global.ListPage = React.createClass({
             </strong>
           </span>
         )
-      } else if (b.complete == false && self.state.view == 'upcoming') {
+      } else if (b.complete == false) {
         actions = (
-          <a href="#" onClick={self.cancelBookingFn(b)}>
-            Cancel
-          </a>
+          <BookingPendingButton bookingId={b.id} stage={self.state.view} onDelete={self.cancelBookingFn(b)} />
         )
       }
 

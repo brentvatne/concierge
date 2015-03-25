@@ -65,6 +65,15 @@ class ApiClient
      full_response: response }
   end
 
+  # Returns true if successful, false otherwise
+  def cancel_booking(id)
+    url = "https://www.car2go.com/api/v2.1/booking/#{id}"
+    response = HTTParty.delete(url,
+      headers: {'Authorization' => auth_headers(url, :cancel_booking, booking_id: id)})
+
+    response.parsed_response['cancelBookingResponse']['returnValue']['code'] == '0'
+  end
+
   def rentals
     get('https://www.car2go.com/api/v2.1/rentals')['rentals']
   end
@@ -135,6 +144,24 @@ class ApiClient
     OAUTH_VERSION
   end
 
+  def parameters_for_cancel(booking_id)
+    # 'bookingId=' + booking_id.to_s +
+    'oauth_callback=' +
+    'oob' +
+    '&oauth_consumer_key=' +
+    OAUTH_CONSUMER_KEY +
+    '&oauth_nonce=' +
+    oauth_nonce +
+    '&oauth_signature_method=' +
+    OAUTH_SIGNATURE_METHOD +
+    '&oauth_timestamp=' +
+    oauth_timestamp +
+    '&oauth_token=' +
+    oauth_token +
+    '&oauth_version=' +
+    OAUTH_VERSION
+  end
+
   def parameters_for_booking(vin, account)
     'account=' + account.to_s +
     '&format=json' +
@@ -186,6 +213,9 @@ class ApiClient
     elsif type == :create_booking
       signature = oauth_signature(url, 'POST',
                                   parameters_for_booking(options[:vin], options[:account]))
+      headers = base_auth_headers
+    elsif type == :cancel_booking
+      signature = oauth_signature(url, 'DELETE', parameters_for_cancel(options[:booking_id]))
       headers = base_auth_headers
     else
       signature = oauth_signature(url)

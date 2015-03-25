@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def cancel_booking(id)
+    api_client.cancel_booking(id)
+  end
+
   private
 
   def api_client

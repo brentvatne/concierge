@@ -16,6 +16,11 @@ class BookingsController < ApplicationController
     render json: {success: true}
   end
 
+  def cancel
+    @booking = Booking.find(params[:id])
+    render json: {success: @booking.cancel!}
+  end
+
   def destroy
     @booking = Booking.find(params[:id])
     render json: {success: !!@booking.destroy}

@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   get '/new-booking' => 'bookings#new'
   post '/book-now' => 'bookings#now'
   resources :bookings do
+    member do
+      post :cancel
+    end
     collection do
       get :upcoming
       get :past
