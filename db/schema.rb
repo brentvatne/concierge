@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150324235432) do
+ActiveRecord::Schema.define(version: 20150325034449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20150324235432) do
     t.string   "address"
     t.float    "lat"
     t.float    "lon"
-    t.boolean  "complete",          default: false, null: false
+    t.boolean  "complete",             default: false, null: false
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -30,8 +30,10 @@ ActiveRecord::Schema.define(version: 20150324235432) do
     t.string   "car_distance"
     t.string   "car_booked_time"
     t.string   "car_license_plate"
-    t.boolean  "asap",              default: false, null: false
-    t.boolean  "in_progress",       default: false, null: false
+    t.boolean  "asap",                 default: false, null: false
+    t.boolean  "in_progress",          default: false, null: false
+    t.string   "reservation_id"
+    t.text     "reservation_response"
   end
 
   create_table "users", force: :cascade do |t|

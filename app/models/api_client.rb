@@ -55,11 +55,14 @@ class ApiClient
      headers: {'Authorization' => auth_headers(url, :create_booking, vin: vin, account: account)}
     )
 
+
     response = response.parsed_response['booking'].first
 
     {address: response['bookingposition']['address'],
      time: Time.at(response['reservationTime']['timeInMillis']),
-     license_plate: response['name'] }
+     license_plate: response['vehicle']['numberPlate'],
+     reservation_id: response['bookingId'],
+     full_response: response }
   end
 
   def rentals

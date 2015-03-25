@@ -35,9 +35,12 @@ class Booking < ActiveRecord::Base
   def perform!(vin)
     if car = user.create_booking(vin)
       update_attributes(complete: true,
+                        in_progress: false,
                         car_address: car[:address],
                         car_booked_time: car[:time],
-                        car_license_plate: car[:license_plate])
+                        car_license_plate: car[:license_plate],
+                        reservation_id: car[:reservation_id],
+                        reservation_response: car[:full_response])
     end
   end
 

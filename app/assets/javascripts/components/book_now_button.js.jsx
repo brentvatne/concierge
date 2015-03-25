@@ -22,8 +22,8 @@ global.BookNowButton = React.createClass({
     return (
       <span>
         <LoadingOverlay isVisible={this.state.isLoading} />
-        <a href="#" onClick={this.createBooking}>
-          Book now!
+        <a href="#" onClick={this.createBooking} className="green">
+          Book now
         </a>
       </span>
     )

@@ -125,7 +125,7 @@ global.LoginPage = React.createClass({
             Schedule Car2Go reservations as
             far in advance as you like, so you
             know that a car will be ready for you
-            when you need it.
+            when you need it. <strong>Currently only available for Vancouver, Canada</strong>
           </p>
           <a href="/auth/new"
              onClick={this.toggleVerifierInput}

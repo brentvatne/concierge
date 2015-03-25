@@ -45,7 +45,7 @@ global.NewBookingPage = React.createClass({
           placeholder="Time, eg: '5:00pm' or '17:00'"/>
         <input key="address" ref="addressInput" type="text"
           valueLink={this.linkState('address')}
-          placeholder="Pickup location, eg: '123 Main Street'"/>
+          placeholder="Desired location: '123 Main St, Vancouver' - include the city!"/>
 
 
         <div className="form--actions">

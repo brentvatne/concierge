@@ -15,6 +15,20 @@
  *= require spinkit/spinkit
  */
 
+$mobile-bp: 500px;
+
+@mixin mobile {
+  @media (max-width: $mobile-bp) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $mobile-bp) {
+    @content;
+  }
+}
+
 html {
   box-sizing: border-box;
   margin: 0;
@@ -114,6 +128,11 @@ $blue: #4A90E2;
   color: rgba(0,0,0,0.35);
   text-align: center;
   font-weight: 300;
+
+  @include mobile {
+    font-size: 14px;
+    display: none;
+  }
 }
 
 .login-box {
@@ -127,6 +146,12 @@ $blue: #4A90E2;
     padding: 15px;
     margin-bottom: 15px;
     border: 1px solid #eee;
+
+    @include mobile {
+      font-size: 14px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
   }
 }
 
@@ -134,11 +159,20 @@ $blue: #4A90E2;
   padding: 30px;
   padding-bottom: 0px;
 
+  @include mobile {
+    padding: 15px;
+    padding-bottom: 0;
+  }
+
   input[type=text] {
     padding: 25px 20px; 
     background: #FEFEFE;
     border: 1px solid #F1F1F1;
     font-weight: 300;
+
+    @include mobile {
+      padding: 15px 10px;
+    }
   }
 }
 
@@ -167,10 +201,20 @@ $blue: #4A90E2;
   position: relative;
   padding-top: 13px;
 
+  @include mobile {
+    padding: 16px 5px 0px 8px;
+    margin-bottom: 18px;
+  }
+
   h1 {
     color: #fff;
     margin: 0;
     font-size: 30px;
+    
+    @include mobile {
+      font-size: 20px;
+      padding-top: 6px;
+    }
   }
 
   .primary-navigation--actions {
@@ -179,16 +223,34 @@ $blue: #4A90E2;
     top: 2px;
 
     a {
+      &.green {
+        background: #19AF39;
+        color: #fff; 
+      }
+
+      &.blue {
+        background: rgb(25, 63, 175);
+        color: #fff;
+      }
+
+      box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
       display: inline-block;
       background: #F9F9F9;
-      // box-shadow: 0px 2px 8px 2px rgba(0,0,0,0.20);
+      color: #918B8B;
+
       margin-left: 10px;
       padding: 9px 25px;
       text-transform: uppercase;
       text-decoration: none;
-      color: #918B8B;
       font-weight: 600;
       font-size: 15px;
+
+      @include mobile {
+        padding: 9px 7px;
+        font-size: 13px;
+        margin-left: 7px;
+        color: #888;
+      }
 
       &:hover {
         color: #ccc;
@@ -201,7 +263,7 @@ $blue: #4A90E2;
   width: 100%;
   text-align: left;
   padding: 0;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   padding-top: 10px;
 }
 
@@ -209,6 +271,10 @@ $blue: #4A90E2;
   padding: 20px;
   border-bottom: 1px solid #E8E6E6;
   position: relative;
+
+  @include mobile {
+    padding: 10px;
+  }
 
   &:last-child {
     border-bottom: none;
@@ -218,11 +284,20 @@ $blue: #4A90E2;
     h2 {
       font-size: 22px;
       margin: 0 0 5px 0;
+
+      @include mobile {
+        font-size: 18px;
+      }
     }
 
     .booking--info--date-time {
       color: #666;
       margin: 5px 0;
+
+      @include mobile {
+        font-size: 15px;
+        margin: 2px 0;
+      }
 
       .time {
         font-weight: bold;
@@ -234,6 +309,17 @@ $blue: #4A90E2;
 
     .booking--info--location {
       margin: 0;
+      color: #666;
+
+      @include mobile {
+        margin-bottom: 10px;
+      }
+    }
+
+    .booked-location--address {
+      @include mobile {
+        font-size: 15px;
+      }
     }
   }
 
@@ -242,6 +328,11 @@ $blue: #4A90E2;
     right: 40px;
     top: 30px;
 
+    @include mobile {
+      position: static;
+      margin-bottom: 10px;
+    }
+
     a {
       background: #eee;
       padding: 20px 40px;
@@ -249,6 +340,13 @@ $blue: #4A90E2;
       text-decoration: none;
       display: inline-block;
       box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.13);
+
+      @include mobile {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        font-size: 15px;
+      }
     }
   }
 }
@@ -291,6 +389,21 @@ $blue: #4A90E2;
 
 .form--actions {
   margin-top: 10px;
+
+  @include mobile {
+    button, a {
+      display: block !important;
+      margin-bottom: 8px;
+      font-weight: 500;
+      text-align: center;
+      width: 100%;
+      font-size: 16px;
+    }
+
+    button:last-child, a:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .login-or {
@@ -322,6 +435,14 @@ $blue: #4A90E2;
   margin-bottom: 15px;
   font-weight: 300;
   padding-left: 5px;
+  font-weight: 500;
+
+  @include mobile {
+    margin-top: 10px;
+    margin-bottom: 7px;
+    font-size: 17px;
+    padding-left: 10px;
+  }
 
   .page-subtitle--link {
     color: #ccc;
@@ -344,6 +465,7 @@ $blue: #4A90E2;
   margin: 0 !important;
   text-align: center;
   padding: 30px;
+  padding-bottom: 40px;
   width: 100%;
   max-width: 100% !important;
   padding-top: 50px;
@@ -362,4 +484,16 @@ $blue: #4A90E2;
   width: 50%;
   margin: 20px auto;
   color: rgb(51, 51, 8);
+}
+
+.desktop-only {
+  @include mobile {
+    display: none;
+  }
+}
+
+.mobile-only {
+  @include desktop {
+    display: none;
+  }
 }

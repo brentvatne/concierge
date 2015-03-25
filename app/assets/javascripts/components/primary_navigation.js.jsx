@@ -15,8 +15,8 @@ global.PrimaryNavigation = React.createClass({
 
     if (this.props.showScheduleBooking) {
       links.push(
-        <a href="/new-booking">
-          Schedule Booking
+        <a href="/new-booking" className="blue">
+          Schedule for later
         </a>
       )
     }

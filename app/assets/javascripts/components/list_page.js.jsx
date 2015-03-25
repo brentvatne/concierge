@@ -74,7 +74,7 @@ global.ListPage = React.createClass({
         location = (
           <span className="booked-location">
             <span className="booked-location--label">
-            Car <strong>{b.carLicensePlate}</strong> booked at: </span>
+            <strong>{b.carLicensePlate}</strong> </span>
             <strong className="booked-location--address">
               {b.carAddress}
             </strong>
