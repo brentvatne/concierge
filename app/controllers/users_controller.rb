@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     )
 
     session[:current_user_id] = @user.id
-    render json: @user
+    render json: {success: true, id: @user.id}
   end
 
   def user_params

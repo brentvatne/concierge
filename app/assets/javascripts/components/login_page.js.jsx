@@ -76,15 +76,23 @@ global.LoginPage = React.createClass({
 
   submitUserInfo: function(e) {
     e.preventDefault()
+
     var name = this.refs.nameInput.getDOMNode().value,
         email = this.refs.emailInput.getDOMNode().value,
         phone = this.refs.phoneInput.getDOMNode().value,
         password = this.refs.passwordInput.getDOMNode().value,
         self = this;
 
+    self.setState({isLoading: true});
+
     $.post('/users', {user: {name: name, email: email, phone: phone, password: password}}).
       done(function(response) {
-        window.location.reload();
+        if (response.success == true) {
+          window.location.reload();
+        } else {
+          alert('Oops, no luck. Did you fill everything in? All fields are required!')
+          self.setState({isLoading: false});
+        }
       });
   },
 
@@ -106,12 +114,15 @@ global.LoginPage = React.createClass({
       action = (
         <form className="user-info-input-wrapper"
               onSubmit={this.submitUserInfo}>
-          <p>Great! Just fill in a few more details and we can get started.</p>
+
+          <p>Great, we were able to connect to your Car2Go account!<br/>
+             Once you fill out all of the fields below and click <em>Finish</em>,
+             we will be done!</p>
 
           <input key="name" type="text" ref="nameInput" placeholder="Name" />
           <input key="email" type="email" ref="emailInput" placeholder="Email" />
           <input key="phone" type="text" ref="phoneInput" placeholder="Phone" />
-          <input key="password" type="password" ref="passwordInput" placeholder="Password" />
+          <input key="password" type="password" ref="passwordInput" placeholder="Pick a password" />
 
           <button className="big-button">
             Finish
