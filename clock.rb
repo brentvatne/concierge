@@ -7,6 +7,6 @@ include Clockwork
 handler do |job|
 end
 
-every(1.minute + 30.seconds, 'Performing bookings') {
+every(1.minute, 'Performing bookings') {
   `rake perform_bookings`
 }
