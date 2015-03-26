@@ -20,6 +20,8 @@ class PerformBookings
           Rails.logger.info(e.backtrace)
         end
 
+        booking.reload
+
         if booking.complete?
           after_complete(booking)
         else
@@ -36,7 +38,7 @@ class PerformBookings
       twilio.messages.create(
         from: '+16042278434',
         to: booking.user.phone,
-        body: "car2go booking: #{booking.car_address} ready"
+        body: "Car booked: #{booking.car_license_plate} at #{booking.car_address}"
       )
     rescue Exception => e
       puts "Error while sending text message:"
