@@ -155,7 +155,7 @@ $blue: #4A90E2;
 }
 
 .new-booking-form {
-  padding: 30px;
+  padding: 20px 30px 30px 30px;
   padding-bottom: 0px;
 
   @include mobile {
@@ -164,7 +164,7 @@ $blue: #4A90E2;
   }
 
   input[type=text] {
-    padding: 25px 20px; 
+    padding: 20px 20px; 
     background: #FEFEFE;
     border: 1px solid #F1F1F1;
     font-weight: 300;
@@ -357,7 +357,7 @@ $blue: #4A90E2;
 
     a {
       background: #eee;
-      padding: 20px 40px;
+      padding: 16px 40px;
       color: #888;
       text-decoration: none;
       display: inline-block;
@@ -555,6 +555,7 @@ $blue: #4A90E2;
 }
 
 $caret-size: 8px;
+$caret-size-mobile: 6px;
 
 .caret {
 	width: 0; 
@@ -563,6 +564,12 @@ $caret-size: 8px;
 	border-left: $caret-size solid transparent;
 	border-right: $caret-size solid transparent;
 	border-top: $caret-size solid #888;
+
+  @include mobile {
+    border-left: $caret-size-mobile solid transparent;
+    border-right: $caret-size-mobile solid transparent;
+    border-top: $caret-size-mobile solid #888;
+  }
 }
 
 .link-options {
@@ -578,6 +585,12 @@ $caret-size: 8px;
     .caret {
       border-top: $caret-size solid #868686;
     }
+
+    @include mobile {
+      .caret {
+        border-top: $caret-size-mobile solid #868686;
+      }
+    }
   }
 
   &.orange {
@@ -585,6 +598,12 @@ $caret-size: 8px;
 
     .caret {
       border-top: $caret-size solid #A2690A;
+    }
+
+    @include mobile {
+      .caret {
+        border-top: $caret-size solid #A2690A;
+      }
     }
   }
 
