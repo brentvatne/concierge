@@ -1,14 +1,10 @@
 global.BookingPendingButton = React.createClass({
+  mixins: [HasDropMenu],
+
   getInitialState: function() {
     return {
-      menuIsOpen: false,
       isLoading: false
     }
-  },
-
-  toggleMenu: function(e) {
-    e.preventDefault();
-    this.setState({menuIsOpen: !this.state.menuIsOpen})
   },
 
   deleteBooking: function(e) {
@@ -38,9 +34,10 @@ global.BookingPendingButton = React.createClass({
     return (
       <div>
         <LoadingOverlay isVisible={this.state.isLoading} />
-        <a href="#" ref="root" className="link-with-options">
+        <a href="#" ref="root" className="link-with-options"
+           onClick={this.toggleMenu}>
           {this.props.stage == 'upcoming' ? "Pending" : "Failed"}
-          <span ref="menuToggle" className="link-options grey" onClick={this.toggleMenu}>
+          <span ref="menuToggle" className="link-options grey">
             <span className="caret"></span>
           </span>
         </a>

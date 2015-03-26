@@ -1,18 +1,15 @@
 global.BookingCompleteButton = React.createClass({
+  mixins: [HasDropMenu],
+
   getInitialState: function() {
     return {
-      menuIsOpen: false,
       isLoading: false
     }
   },
 
-  toggleMenu: function(e) {
-    e.preventDefault();
-    this.setState({menuIsOpen: !this.state.menuIsOpen})
-  },
-
   cancelReservation: function() {
     this.setState({isLoading: true});
+
     $.post('/bookings/' + this.props.bookingId + '/cancel', {}).complete(function() {
       window.location.reload();
     })
@@ -41,11 +38,12 @@ global.BookingCompleteButton = React.createClass({
      }
 
     return (
-      <div>
+      <div ref="root">
         <LoadingOverlay isVisible={this.state.isLoading} />
-        <a href="#" ref="root" className="link-with-options booking-complete-button">
+        <a href="#" className="link-with-options booking-complete-button"
+           onClick={this.toggleMenu}>
           Booked!
-          <span ref="menuToggle" className="link-options orange" onClick={this.toggleMenu}>
+          <span ref="menuToggle" className="link-options orange">
             <span className="caret"></span>
           </span>
         </a>

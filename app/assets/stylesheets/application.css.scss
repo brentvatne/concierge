@@ -600,7 +600,6 @@ $caret-size: 8px;
   position: absolute;
   display: none;
   z-index: 999;
-  border-top: 1px solid #D6D6D6;
 
   @include desktop {
     // bottom: -53px;
@@ -616,9 +615,14 @@ $caret-size: 8px;
   width: 100%;
   background: #fff;
 
+  a:first-child {
+    border-top: 1px solid #D6D6D6;
+  }
+
   a {
     width: 100% !important;
     padding: 15px 10px !important;
+    background: #F9F9F9 !important;
   }
 
   &.active {
