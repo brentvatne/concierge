@@ -11,12 +11,12 @@ global.PrimaryNavigation = React.createClass({
     var links = [];
 
     if (this.props.showBookNow) {
-      links.push(<BookNowButton />)
+      links.push(<BookNowButton key="book-now-button" />)
     }
 
     if (this.props.showScheduleBooking) {
       links.push(
-        <a href="/new-booking" className="blue">
+        <a href="/new-booking" className="blue" key="schedule-for-later-link">
           Schedule for later
         </a>
       )
@@ -24,7 +24,7 @@ global.PrimaryNavigation = React.createClass({
 
     if (this.props.showBackHome) {
       links.push(
-        <a href="/" className="go-home-link">
+        <a href="/" className="go-home-link" key="go-home-link">
           Go back home
         </a>
       )

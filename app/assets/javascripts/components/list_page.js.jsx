@@ -96,7 +96,7 @@ global.ListPage = React.createClass({
       }
 
       list.push(
-        <div className="booking">
+        <div className="booking" key={b.id}>
           <div className="booking--info">
             <h2>{b.title}{badge}</h2>
             <p className="booking--info--date-time">

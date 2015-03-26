@@ -15,7 +15,7 @@ global.HasDropMenu = {
 
   clickOuter: function(e) {
     var root = this.refs.root.getDOMNode();
-    if (! $.contains(root, e.target)) {
+    if (! $.contains(root, e.target) && root != e.target) {
       this.setState({menuIsOpen: false});
     }
   },
