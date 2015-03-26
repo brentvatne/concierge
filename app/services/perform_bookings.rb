@@ -19,14 +19,12 @@ class PerformBookings
         rescue Exception => e
           Rails.logger.info(e.backtrace)
         end
+      end
 
-        booking.reload
-
-        if booking.complete?
-          after_complete(booking)
-        else
-          puts "Nothing close enough to #{booking.id}"
-        end
+      if booking.complete?
+        after_complete(booking)
+      else
+        puts "Nothing close enough to #{booking.id}"
       end
     end
   end
