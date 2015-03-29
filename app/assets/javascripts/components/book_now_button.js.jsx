@@ -13,8 +13,7 @@ global.BookNowButton = React.createClass({
     self.setState({isLoading: true});
     navigator.geolocation.getCurrentPosition(function(position) {
       var data = {lat: position.coords.latitude, lon: position.coords.longitude}
-      $.post('/book-now', data).
-        complete(function() { window.location.reload() })
+      ApiClient.bookNow(data);
     })
   },
 
