@@ -11,10 +11,19 @@ global.BookNowButton = React.createClass({
     var self = this;
 
     self.setState({isLoading: true});
-    navigator.geolocation.getCurrentPosition(function(position) {
+
+    var bookNow = function(position) {
       var data = {lat: position.coords.latitude, lon: position.coords.longitude}
       ApiClient.bookNow(data);
-    })
+    };
+
+    var failedToFindLocation = function() {
+      alert("Sorry, your location could not be found");
+    };
+
+    navigator.geolocation.getCurrentPosition(bookNow, failedToFindLocation, {
+      maximumAge: 60000, enableHighAccuracy: true
+    });
   },
 
   render: function() {
