@@ -47,7 +47,7 @@ class PerformBookings
   def available_cars_for(booking)
     available_cars.
       map      { |car| car['distance'] = booking.distance_to(car['location']); car }.
-      find_all { |car| car['distance'] < 750 }.
+      find_all { |car| car['distance'] <= 500 }.
       sort_by  { |car| car['distance'] }
   end
 
