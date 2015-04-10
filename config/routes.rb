@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/locations/address-for-coords' => 'locations#address_for_coords'
+
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

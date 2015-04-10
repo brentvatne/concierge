@@ -74,7 +74,9 @@ h1,h2,h3,h4,h5,h6,p,span,div,input {
 }
 
 .login-box {
-  margin-top: 30px;
+  @include desktop {
+    margin-top: 30px;
+  }
 }
 
 $blue: #4A90E2;
@@ -646,5 +648,39 @@ $caret-size-mobile: 6px;
 
   &.active {
     display: block;
+  }
+}
+
+.address-input-wrapper {
+  position: relative;
+
+  input {
+    padding-right: 35px !important;
+  }
+}
+
+.get-current-location-button {
+  position: absolute;
+
+  &:hover {
+    .ion-pinpoint {
+      color: $blue;
+      cursor: pointer;
+    }
+  }
+
+  .ion-pinpoint {
+    font-size: 22px;
+    color: rgba(0,0,0,0.7);
+  }
+
+  @include mobile {
+    right: 10px;
+    top: 11px;
+  }
+
+  @include desktop {
+    right: 15px;
+    top: 17px;
   }
 }
