@@ -9,11 +9,13 @@ global.LoginPage = React.createClass({
   },
 
   toggleVerifierInput: function(e) {
+    e.preventDefault();
     this.setState({waitingForVerifier: true});
   },
 
   toggleExistingAccountForm: function(e) {
-    this.setState({showExistingAccountForm: !this.state.showExistingAccountForm});    
+    e.preventDefault();
+    this.setState({showExistingAccountForm: !this.state.showExistingAccountForm});
   },
 
   submitExistingAccountForm: function(e) {
@@ -47,7 +49,8 @@ global.LoginPage = React.createClass({
 
         <div className="form--actions">
           <button className="medium-button">Sign in</button>
-          <a className="medium-button cancel-button"
+          <a href="#"
+             className="medium-button cancel-button"
              onClick={this.toggleExistingAccountForm}>
             Cancel
           </a>
@@ -127,7 +130,7 @@ global.LoginPage = React.createClass({
           <button className="big-button">
             Finish
           </button>
-        </form>        
+        </form>
       )
     } else if (this.state.showExistingAccountForm) {
       action = this.renderExistingAccountForm();
@@ -148,9 +151,10 @@ global.LoginPage = React.createClass({
           </a>
           <p className="login-or">or</p>
           <a onClick={this.toggleExistingAccountForm}
+             href="#"
              className="big-button alternate-button mb20">
             Sign in using an existing account
-          </a> 
+          </a>
         </div>
       )
     }
