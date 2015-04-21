@@ -16,6 +16,7 @@ gem 'active_model_serializers'
 gem 'chronic'
 gem 'twilio-ruby'
 gem 'clockwork'
+gem 'dalli'
 
 group :production do
   gem 'unicorn'
