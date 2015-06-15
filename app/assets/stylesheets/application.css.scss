@@ -211,7 +211,7 @@ $blue: #4A90E2;
     color: #fff;
     margin: 0;
     font-size: 30px;
-    
+
     @include mobile {
       font-size: 20px;
       padding-top: 6px;
@@ -231,16 +231,13 @@ $blue: #4A90E2;
     a {
       @include mobile {
         text-align: center;
+        font-size: 12px;
 
         &.green {
-          // background: #19AF39;
-          // color: #fff; 
           width: 47%;
         }
 
         &.blue {
-          // background: rgb(25, 63, 175);
-          // color: #fff;
           width: 47%;
         }
       }
