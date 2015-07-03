@@ -15,6 +15,9 @@ global.LoginPage = React.createClass({
   toggleExistingAccountForm: function(e) {
     e.preventDefault();
     this.setState({showExistingAccountForm: !this.state.showExistingAccountForm});
+    requestAnimationFrame(function() {
+      $(window).scrollTop(0);
+    });
   },
 
   submitExistingAccountForm: function(e) {
