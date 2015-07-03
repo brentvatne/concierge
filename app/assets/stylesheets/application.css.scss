@@ -64,7 +64,9 @@ h1,h2,h3,h4,h5,h6,p,span,div,input {
   position: relative;
 
   p {
-    max-width: 75%;
+    @include desktop {
+      max-width: 75%;
+    }
     margin: 0 auto 30px auto;
   }
 
@@ -77,6 +79,10 @@ h1,h2,h3,h4,h5,h6,p,span,div,input {
   @include desktop {
     margin-top: 30px;
   }
+
+  @include mobile {
+    margin-top: 0;
+  }
 }
 
 $blue: #4A90E2;
@@ -88,9 +94,16 @@ $blue: #4A90E2;
   background: $blue;
   padding: 20px;
   color: #fff;
-  font-size: 18px;
   text-decoration: none;
   font-weight: bold;
+
+  @include desktop {
+    font-size: 18px;
+  }
+
+  @include mobile {
+    font-size: 16px;
+  }
 
   &:hover {
     cursor: pointer;
@@ -130,6 +143,7 @@ $blue: #4A90E2;
   color: rgba(0,0,0,0.35);
   text-align: center;
   font-weight: 300;
+  margin-bottom: 15px;
 
   @include mobile {
     font-size: 14px;

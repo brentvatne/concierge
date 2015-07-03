@@ -152,7 +152,7 @@ global.LoginPage = React.createClass({
           <a onClick={this.toggleExistingAccountForm}
              href="#"
              className="big-button alternate-button mb20">
-            Sign in using an existing account
+            Sign in to your account
           </a>
         </div>
       )
