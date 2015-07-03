@@ -9,7 +9,6 @@ global.LoginPage = React.createClass({
   },
 
   toggleVerifierInput: function(e) {
-    e.preventDefault();
     this.setState({waitingForVerifier: true});
   },
 
@@ -111,8 +110,8 @@ global.LoginPage = React.createClass({
           <button className="big-button">
              Continue
           </button>
-        </form>        
-      )      
+        </form>
+      )
     } else if (this.state.waitingForUserInfo) {
       action = (
         <form className="user-info-input-wrapper"
